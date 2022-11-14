@@ -126,8 +126,7 @@
 					</div>
 				</form>
 				<div class="content_footer">
-					<a type="submit" onclick="LoadMore()"
-						class="content_footer-seemore">Xem thêm</a>
+					<a type="submit" onclick="LoadMore()" class="content_footer-seemore">Xem thêm</a>
 				</div>
 			</div>
 

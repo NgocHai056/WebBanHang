@@ -1,0 +1,38 @@
+@charset "UTF-8";
+:root {
+    --primary-color: rgb(244, 73, 101);
+    --primary-rgba-color: rgba(244, 73, 101, 0.9);
+    --white-color: #fff;
+    --black-color: #000;
+    --border-color: #d8d4d4;
+}
+
+table {
+    border: 0;
+}
+
+table td {
+    padding: 5px;
+}
+
+.title_header {
+    color: var(--primary-color);
+}
+
+.title_sc {
+    color: var(--primary-rgba-color);
+}
+
+.btn {
+    height: 40px;
+    width: 100%;
+    margin-top: 16px;
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn:hover {
+    color: var(--white-color) !important;
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
