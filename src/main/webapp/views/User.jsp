@@ -3,12 +3,13 @@
 <%@ include file="/common/taglib.jsp"%>
 
 <head>
-	<link rel="stylesheet" href="./assets/css/user.css">
+<link rel="stylesheet" href="./assets/css/user.css">
+<link rel="stylesheet"
+	href="<c:url value="./assets/css/user.css"></c:url>">
 </head>
 
 <body>
-	<link rel="stylesheet"
-		href="<c:url value="./assets/css/user.css"></c:url>">
+
 
 	<!-- Content -->
 	<div class="container">
@@ -367,5 +368,6 @@
 		});
 	</script>
 	<script src="<c:url value="./assets/javascript/user.js"></c:url>"></script>
-	<script src="<c:url value="./assets/javascript/OrderStatus.js"></c:url>"></script>
+	<script
+		src="<c:url value="./assets/javascript/OrderStatus.js"></c:url>"></script>
 </body>

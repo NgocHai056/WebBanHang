@@ -263,7 +263,7 @@
 }
 
 .home-product-item__price-old {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #666;
     text-decoration: line-through;
     margin-right: 10px;
