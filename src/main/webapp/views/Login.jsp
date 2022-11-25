@@ -206,7 +206,7 @@
 											method="post">
 											<div class="form-group">
 												<input type="text" class="form-control email"
-													name="userName" placeholder="Email/SĐT">
+													name="userName" placeholder="Tên tài khoản">
 											</div>
 											<div class="form-group">
 												<div class="pwdMask">
@@ -263,12 +263,12 @@
 										<form action="layout-Signup?mask=0" name="signupForm"
 											class="signupForm" action="#" method="POST">
 											<div class="form-group">
-												<input name="name" type="text" class="form-control"
+												<input type="text" class="form-control"
 													name="fullname" placeholder="Tên">
 											</div>
 											<div class="form-group">
 												<input name="userName" type="text" class="form-control"
-													name="username" placeholder="Email OR Phone">
+													name="username" placeholder="Tên tài khoản">
 											</div>
 											<div class="form-group">
 												<div class="pwdMask">
@@ -299,18 +299,18 @@
 							<!-- ./panel-signup -->
 
 							<!-- panel-forget start -->
-							<div id="forgotPwd" class="authfy-panel panel-forgot ">
+							<div id="forgotPwd" class="authfy-panel panel-forgot ${mask == 2 ? "active":""}">
 								<div class="row">
 									<div class="col-xs-12 col-sm-12">
 										<div class="authfy-heading">
 											<h3 class="auth-title">Khôi phục mật khẩu</h3>
-											<p>Mật khẩu mới sẽ được gửi về email của bạn.</p>
+											<p>Mật khẩu mới sẽ được gửi về tài khoản của bạn.</p>
 										</div>
 										<form name="forgetForm" class="forgetForm"
 											action="layout-forgotPassword" method="POST">
 											<div class="form-group">
-												<input name="email" type="email" class="form-control"
-													name="username" placeholder="Email">
+												<input name="email" type="text" class="form-control"
+													name="username" placeholder="Tài khoản">
 											</div>
 											<div class="form-group">
 												<button class="btn btn-lg btn-primary btn-block"

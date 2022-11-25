@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="/common/taglib.jsp" %>
+<%@ include file="/common/taglib.jsp"%>
 
 <head>
-    <title>Mua sắm online</title>
-    <link rel="stylesheet" href='<c:url value="./assets/css/category.css"></c:url>'>
+<title>Mua sắm online</title>
+<link rel="stylesheet"
+	href='<c:url value="./assets/css/category.css"></c:url>'>
 </head>
 
 <body>
@@ -23,38 +24,38 @@
 					</div>
 				</div>
 				<div class="row">
-					<c:forEach items="${listAllProducts}" var="pd">									
+					<c:forEach items="${ListP}" var="pd">
 						<div class="col-2-4">
-								<div class="card">
-									<a href="PdsDetail?psdID=${pd.id}" class="card-item"> <img
-										src="${pd.image}" class="card-img-top" alt="${pd.productName}">
-										<div class="card-body">
-											<h6 class="card-title home-product-item__name">${pd.productName}</h6>
-											<div class="home-product-item__price">
-												<span class="home-product-item__price-old"><fmt:formatNumber
-														type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ</span>
-												<span class="home-product-item__price-current"> <fmt:formatNumber
-														type="number" pattern="#,###"
-														value="${pd.price - (pd.price * pd.id_discount) / 100}"></fmt:formatNumber>đ
-												</span>
-											</div>
-										</div> <c:if test="${pd.id_discount != 0}">
+							<div class="card">
+								<a href="PdsDetail?psdID=${pd.id}" class="card-item"> <img
+									src="${pd.image}" class="card-img-top" alt="${pd.productName}">
+									<div class="card-body">
+										<h6 class="card-title home-product-item__name">${pd.productName}</h6>
+										<div class="home-product-item__price">
+											<span class="home-product-item__price-old"><fmt:formatNumber
+													type="number" pattern="#,###"
+													value="${pd.price + pd.price*0.1}"></fmt:formatNumber>đ</span> <span
+												class="home-product-item__price-current"> <fmt:formatNumber
+													type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ
+											</span>
+										</div>
+									</div> <%-- <c:if test="${pd.id_discount != 0}">
 											<div class="home-product-item__sale-off">${pd.id_discount}%</div>
-										</c:if>
-									</a>
+										</c:if> --%>
+								</a>
 
-									<div class="card-body card-btn">
-										<c:if test="${sessionScope.account != null}">
-											<a type="submit" onclick="buy('${pd.id}')" class="card-link">Thêm
-												vào giỏ hàng</a>
-										</c:if>
-										<c:if test="${sessionScope.account == null}">
-											<a href="layout-Login?mask=login" class="card-link">Thêm vào giỏ
-												hàng</a>
-										</c:if>
-									</div>
+								<div class="card-body card-btn">
+									<c:if test="${sessionScope.account != null}">
+										<a type="submit" onclick="buy('${pd.id}')" class="card-link">Thêm
+											vào giỏ hàng</a>
+									</c:if>
+									<c:if test="${sessionScope.account == null}">
+										<a href="layout-Login?mask=login" class="card-link">Thêm
+											vào giỏ hàng</a>
+									</c:if>
 								</div>
 							</div>
+						</div>
 					</c:forEach>
 				</div>
 				<div class="content_footer">
@@ -62,7 +63,7 @@
 						<li class="paging-item col"><i
 							class="fa-sharp fa-solid fa-angle-left pagination-item__link"></i>
 						</li>
-						<li class="paging-item col"><a href=""
+						<!-- <li class="paging-item col"><a href=""
 							class="pagination-item__link paging_active">1</a></li>
 						<li class="paging-item col"><a href=""
 							class="pagination-item__link">2</a></li>
@@ -73,7 +74,13 @@
 						<li class="paging-item col"><a href=""
 							class="pagination-item__link">...</a></li>
 						<li class="paging-item col"><a href=""
-							class="pagination-item__link">10</a></li>
+							class="pagination-item__link">10</a></li> -->
+						<c:forEach begin="1" end="${endP}" var="pd">
+							<li class="paging-item col"><a
+								href="Category?cid=${categoryName.category_id}&&index=${pd}"
+								class="pagination-item__link ${tag==pd?"paging_active":""}">${pd}</a>
+							</li>
+						</c:forEach>
 						<li class="paging-item col"><i
 							class="fa-sharp fa-solid fa-angle-right pagination-item__link"></i>
 						</li>
@@ -83,5 +90,25 @@
 		</div>
 
 	</div>
-	
+
+	<script type="text/javascript">
+		function buy(id) {
+			var amount = 1;
+			$.ajax({
+				url : "/WebBanHang/member/cart-add",
+				type : "get", //send it through get method
+				data : {
+					pId : id,
+					quantity : amount
+				},
+				success : function(data) {
+
+				},
+				error : function(xhr) {
+					//Do Something to handle error
+				}
+			});
+		}
+	</script>
+
 </body>

@@ -36,11 +36,24 @@ public class ValidateOtp extends HttpServlet {
 		String mask = (String) session.getAttribute("mask");
 
 		if (value == otp && mask.equals("SMS")) {
-
+			String userName = (String) session.getAttribute("userName");
+			String pass = (String) session.getAttribute("pass");
+			String fullname = (String) session.getAttribute("fullname");
+			String[] arrOfStr = fullname.split(" ", 2);			  	       
+			
+			UserDAO userDAO = new UserDAO();
+			UserModel userModel = new UserModel();
+			userModel.setUsers_username(userName);
+			userModel.setUsers_pass_word(pass);
+			userModel.setRole(0);
+			userModel.setUsers_last_name(arrOfStr[0]);
+			userModel.setUsers_first_name(arrOfStr[1]);
+			userDAO.insertUsers(userModel);
+			
 			request.setAttribute("email", request.getParameter("email"));
 			request.setAttribute("status", "success");
 
-			response.sendRedirect("home");
+			response.sendRedirect("layout-Login?mask=login");
 
 		} else if (value == otp && mask.equals("Seller")) {
 			String userName = (String) session.getAttribute("email");

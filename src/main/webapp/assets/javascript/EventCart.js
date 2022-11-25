@@ -1,3 +1,4 @@
+/*
 const input = document.querySelectorAll('input')
 
 input.forEach(function(input){
@@ -15,4 +16,29 @@ function cartTotal(){
 		total = total + (inputValue * productPrice)			
 	}	
 	totalPrice.innerHTML = total.toLocaleString('de-DE')
+}
+*/
+
+var count = document.querySelector("#quantity")
+
+var amount = 1
+count.addEventListener('change', function(e) {
+	amount = e.target.value	
+})
+console.log(amount)
+function buy(id) {
+	$.ajax({
+		url: "/WebBanHang/cart-change",
+		type: "get", //send it through get method
+		data: {
+			pId: id,
+			quantity: amount
+		},
+		success: function(data) {
+
+		},
+		error: function(xhr) {
+			//Do Something to handle error
+		}
+	});
 }

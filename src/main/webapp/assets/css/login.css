@@ -1,15 +1,21 @@
-@media (min-width: 576px) and (max-width: 767px) {
-    .col-sm-4 {
-        max-width: 100%;
-        flex: auto;
-    }
+@media (max-width: 1024px) {
+	.row {
+		justify-content: center;	
+	}
+}
 
+@media (min-width: 576px) and (max-width: 767px) {
     .authfy-panel-left,
     .authfy-panel-right {
-        float: left;
+		display: flex !important;
+   		max-width: 100% !important;
+   		flex-direction: column;
     }
-
-}
+    
+    .col-ms-7 {
+    	max-width: 100%
+    }
+} 
 
 @media (min-width: 320px) and (max-width: 375px) {
 
@@ -152,6 +158,7 @@ a:focus {
 .header-text-brand {
     color: var(--primary-color);
     z-index: 1;
+    margin-left: 16px;
 }
 
 .header-text-brand:hover {

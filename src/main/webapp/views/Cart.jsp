@@ -41,24 +41,25 @@
 												<div class="col-md-3 col-lg-3 col-xl-3">
 													<h6 class="text-muted">${map.value.product.productName}</h6>
 													<h6 class="text-black mb-0">
-														<span>${map.value.product.price}</span>
+														<fmt:formatNumber type="number" pattern="#,###"
+															value="${map.value.product.price}"></fmt:formatNumber>
 														đ
 													</h6>
 												</div>
 												<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-													<!-- <form action="process" method="post"> -->
-													<button class="btn btn-link px-2" type="submit"
-														onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-													</button>
+													<form action="cart-change" method="post">
+														<button class="btn btn-link px-2" type="submit"
+															onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+														</button>
+														<input type="hidden" name="pId"
+															value="${map.value.product.id}" /> <input id="quantity"
+															min="0" name="quantity" value="${map.value.quantity}"
+															type="number" class="form-control form-control-sm" />
 
-													<input id="form1" min="0" name="quantity"
-														value="${map.value.quantity}" type="number"
-														class="form-control form-control-sm" />
-
-													<button class="btn btn-link px-2" type="submit"
-														onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-													</button>
-													<!-- </form> -->
+														<button class="btn btn-link px-2" type="submit"
+															onclick="buy('${productDetail.id}') this.parentNode.querySelector('input[type=number]').stepUp()">
+														</button>
+													</form>
 
 													<!-- <button>
 														<a href="process?num=-1&id=${pd.product_id}">-</a>
@@ -150,13 +151,20 @@
 														value="${total +map.value.quantity * map.value.product.price}"></c:set>
 												</c:forEach>
 												<span><fmt:formatNumber type="number" pattern="#,###"
-													value="${total}"></fmt:formatNumber></span>
-												đ
+														value="${total}"></fmt:formatNumber></span>đ
 											</h5>
 										</div>
 
-										<a href="layout-Payment" class="btn btn-dark btn-block btn-lg"
-											data-mdb-ripple-color="dark">Thanh toán</a>
+										<c:if test="${sessionScope.cart.size() > 0}">
+											<a href="layout-Payment"
+												class="btn btn-dark btn-block btn-lg"
+												data-mdb-ripple-color="dark">Thanh toán</a>
+										</c:if>
+										<c:if test="${sessionScope.cart.size() == 0}">
+											<a href="showCart"
+												class="btn btn-dark btn-block btn-lg"
+												data-mdb-ripple-color="dark">Thanh toán</a>
+										</c:if>
 
 									</div>
 								</div>
@@ -167,7 +175,6 @@
 			</div>
 		</div>
 	</section>
-
 
 	<script type="text/javascript" src="./assets/javascript/EventCart.js"></script>
 	<script

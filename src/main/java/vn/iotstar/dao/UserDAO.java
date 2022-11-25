@@ -37,6 +37,21 @@ public class UserDAO {
             // TODO: handle exception
         }
     }
+    public void insertUsers(UserModel user) {
+        String query = "INSERT INTO USERS(users_username, users_pass_word, role, users_last_name, users_first_name) VALUES(?, ?, ?, ?, ?)";
+        try {
+            conn = new DBConnection().getConnection();
+            ps = conn.prepareStatement(query);
+            ps.setString(1, user.getUsers_username());
+            ps.setString(2, user.getUsers_pass_word());
+            ps.setInt(3, user.getRole());
+            ps.setString(4, user.getUsers_last_name());
+            ps.setString(5, user.getUsers_first_name());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+    }
     public void insertUserGG(UserModel user) {
         String query = "INSERT INTO USERS(users_username, users_last_name) VALUES(?, ?)";
         try {
@@ -52,31 +67,33 @@ public class UserDAO {
 
     public UserModel getUser(String userName) {
 
-        String query = "SELECT * FROM USERS WHERE users_username LIKE ?";
+        String query = "SELECT * FROM USERS WHERE users_username = ?";
 
         try {
             conn = new DBConnection().getConnection();
             ps = conn.prepareStatement(query);
-            ps.setString(1, "%" + userName + "%");
+            ps.setString(1, userName);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                return new UserModel(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getDate(9),
-                        rs.getDate(10),
-                        rs.getDate(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getString(15));
+            	UserModel user = new UserModel();
+                user.setUserID(rs.getInt("users_id"));
+                user.setUsers_username(rs.getString("users_username"));
+                user.setUsers_pass_word(rs.getString("users_pass_word"));
+                user.setUsers_avatar(rs.getString("users_avatar"));
+                user.setUsers_last_name(rs.getString("users_last_name"));
+                user.setUsers_first_name(rs.getString("users_first_name"));
+                user.setUsers_gender(rs.getString("users_gender"));
+                user.setRole(rs.getInt("role"));
+                user.setUsers_birthday(rs.getDate("users_birthday"));
+                user.setUsers_email(rs.getString("users_email"));
+                user.setUsers_phone(rs.getString("users_phone"));
+                user.setUsers_shipping_address(rs.getString("users_shipping_address"));
+                user.setUsers_ship_postal_code(rs.getString("users_ship_postal_code"));
+                user.setCreate_at(rs.getDate("create_at"));
+                user.setUpdate_at(rs.getDate("update_at"));
+                                        
+                return user;
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -85,7 +102,7 @@ public class UserDAO {
     }
     public UserModel getUserById(int id) {
 
-        String query = "SELECT * FROM USERS WHERE users_id LIKE ?";
+        String query = "SELECT * FROM USERS WHERE users_id = ?";
 
         try {
             conn = new DBConnection().getConnection();
@@ -94,22 +111,24 @@ public class UserDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                return new UserModel(
-                		rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getDate(9),
-                        rs.getDate(10),
-                        rs.getDate(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getString(15));
+            	UserModel user = new UserModel();
+                user.setUserID(rs.getInt("users_id"));
+                user.setUsers_username(rs.getString("users_username"));
+                user.setUsers_pass_word(rs.getString("users_pass_word"));
+                user.setUsers_avatar(rs.getString("users_avatar"));
+                user.setUsers_last_name(rs.getString("users_last_name"));
+                user.setUsers_first_name(rs.getString("users_first_name"));
+                user.setUsers_gender(rs.getString("users_gender"));
+                user.setRole(rs.getInt("role"));
+                user.setUsers_birthday(rs.getDate("users_birthday"));
+                user.setUsers_email(rs.getString("users_email"));
+                user.setUsers_phone(rs.getString("users_phone"));
+                user.setUsers_shipping_address(rs.getString("users_shipping_address"));
+                user.setUsers_ship_postal_code(rs.getString("users_ship_postal_code"));
+                user.setCreate_at(rs.getDate("create_at"));
+                user.setUpdate_at(rs.getDate("update_at"));
+                                        
+                return user;
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -119,7 +138,7 @@ public class UserDAO {
 
     public UserModel checkAccount(String userName, String pass) {
 
-        String query = "SELECT * FROM USERS WHERE users_username LIKE ? AND users_pass_word LIKE ?";
+        String query = "SELECT * FROM USERS WHERE users_username = ? AND users_pass_word = ?";
 
         try {
             conn = new DBConnection().getConnection();
@@ -129,27 +148,31 @@ public class UserDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                return new UserModel(
-                		rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getInt(8),
-                        rs.getDate(9),
-                        rs.getDate(10),
-                        rs.getDate(11),
-                        rs.getString(12),
-                        rs.getString(13),
-                        rs.getString(14),
-                        rs.getString(15));
+                UserModel user = new UserModel();
+                user.setUserID(rs.getInt("users_id"));
+                user.setUsers_username(rs.getString("users_username"));
+                user.setUsers_pass_word(rs.getString("users_pass_word"));
+                user.setUsers_avatar(rs.getString("users_avatar"));
+                user.setUsers_last_name(rs.getString("users_last_name"));
+                user.setUsers_first_name(rs.getString("users_first_name"));
+                user.setUsers_gender(rs.getString("users_gender"));
+                user.setRole(rs.getInt("role"));
+                user.setUsers_birthday(rs.getDate("users_birthday"));
+                user.setUsers_email(rs.getString("users_email"));
+                user.setUsers_phone(rs.getString("users_phone"));
+                user.setUsers_shipping_address(rs.getString("users_shipping_address"));
+                user.setUsers_ship_postal_code(rs.getString("users_ship_postal_code"));
+                user.setCreate_at(rs.getDate("create_at"));
+                user.setUpdate_at(rs.getDate("update_at"));
+                                        
+                return user;
             }
         } catch (Exception e) {
             // TODO: handle exception
         }
         return null;
     }
-
+    public static void main(String[] args) {
+		System.out.println(new UserDAO().getUser("20110639"));
+	}
 }

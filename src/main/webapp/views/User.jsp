@@ -49,10 +49,10 @@
 						<div class="invalid-feedback col-md-10">Vui lòng nhập tên.</div>
 					</div>
 					<div class="mb-3 form_text">
-						<span class="text_title col-md-2">Email</span>
+						<span class="text_title col-md-2">Tài khoản</span>
 						<div class="text_email active">
-							<span class="col-md-4">${sessionScope.email}</span> <a href=""
-								style="color: #495057;" class="col-md-6 a--primary">Thay đổi</a>
+							<span class="col-md-4">${sessionScope.email}</span> <!-- <a href=""
+								style="color: #495057;" class="col-md-6 a--primary">Thay đổi</a> -->
 						</div>
 						<div class="text_email">
 							<span class="col-md-4"></span> <a href="" style="color: #495057;"
@@ -71,15 +71,15 @@
 					</div>
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-2">Giới tính</span> <input
-							name="gender" type="radio" value="Nam" checked> <span
+							name="gender" type="radio" value="Nam" ${sessionScope.account.users_gender == "Nam" ? "checked":""}> <span
 							class="gender">Nam</span> <input name="gender" type="radio"
-							value="Nữ"> <span class="gender">Nữ</span> <input
+							value="Nữ" ${sessionScope.account.users_gender == "Nu" ? "checked":""}> <span class="gender">Nữ</span> <input
 							name="gender" type="radio" value="Khác"> <span
 							class="gender">Khác</span>
 					</div>
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-2">Ngày sinh</span> <input
-							class="col-md-2" type="date" id="birthday" name="birthday"
+							class="col-md-2" type="date" id="birthday" name="birthday" value="${sessionScope.account.users_birthday}"
 							required> <span class="text_title col-md-8"></span> <span
 							class="text_title col-md-2"></span>
 						<div class="invalid-feedback col-md-10">Vui lòng chọn ngày
@@ -101,29 +101,29 @@
 				<form class="needs-validation" novalidate>
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-2">Tên</span> <input type="text"
-							class="form-control col-md-10" id="firstName" placeholder=""
+							class="form-control col-md-10" id="firstNameChange" placeholder=""
 							value="${sessionScope.name}" required> <span
 							class="text_title col-md-2"></span>
 						<div class="invalid-feedback col-md-10">Vui lòng nhập tên.</div>
 					</div>
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-2">Số điện thoại</span> <input
-							type="tel" class="form-control col-md-10" id="tel" placeholder=""
-							value="0395162022" required> <span
+							type="tel" class="form-control col-md-10" id="telChange" placeholder=""
+							value="${sessionScope.account.users_phone}" required> <span
 							class="text_title col-md-2"></span>
 						<div class="invalid-feedback col-md-10">Vui lòng nhập số
 							điện thoại.</div>
 					</div>
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-2">Địa chỉ cụ thể</span> <input
-							type="text" class="form-control col-md-10" id="text"
-							placeholder="" value="Số 1" required> <span
+							type="text" class="form-control col-md-10" id="textAddress"
+							placeholder="" value="${sessionScope.account.users_shipping_address}" required> <span
 							class="text_title col-md-2"></span>
 						<div class="invalid-feedback col-md-10">Vui lòng nhập địa
 							chỉ cụ thể của bạn.</div>
 					</div>
 					<div class="mb-3 form_text">
-						<span class="text_title col-md-2">Địa chỉ</span>
+						<!-- <span class="text_title col-md-2">Địa chỉ</span>
 						<div class="pd-l-0 col-md-3">
 							<select name="ls_province" class="form_select" id="province"
 								required>
@@ -140,12 +140,12 @@
 							<select name="ls_ward" class="form_select" id="ward" required>
 							</select>
 							<div class="invalid-feedback">Vui lòng chọn phường/xã.</div>
-						</div>
+						</div> -->
 					</div>
 
 					<div class="mb-3 form_btn--save">
 						<span class="col-md-2"></span>
-						<button
+						<button id="luu"
 							class="btn btn-outline-success my-2 my-sm-0 btn-lg btn-block btn-save"
 							type="submit">Lưu</button>
 					</div>
@@ -162,7 +162,7 @@
 					<div class="mb-3 form_text">
 						<span class="text_title col-md-3">Mật khẩu hiện tại</span> <input
 							type="password" class="form-control col-md-4"
-							id="currentPassword" placeholder="" value="" required> <a
+							id="currentPassword" placeholder="" value="" required> <a href="layout-Login?mask=forgot"
 							class="forgot_password col-md-5">Quên mật khẩu?</a> <span
 							class="text_title col-md-3"></span>
 						<div class="invalid-feedback col-md-9">Vui lòng nhập mật
@@ -198,6 +198,7 @@
 			<!-- My Oder-->
 			<div id="order_form"
 				class="user_content-right user_oder col-md-10 order-md-1">
+				<input type="hidden" id="idUser" value="${sessionScope.idUser}"/>
 				<div class="col-md-12">
 					<ul class="list_typeOrder">
 						<li id="item_typeOrder_all" class="item_typeOrder col-2-4 active"
@@ -228,7 +229,7 @@
                         <span class="titler-no_order">Chưa có đơn hàng</span>
                     </div> -->
 
-					<div class="item_order" id="list_order">
+					<!-- <div class="item_order" id="list_order">
 						<div class="col-md-12 header_order">Chờ xác nhận</div>
 						<div class="col-md-12 body_order">
 							<div class="col-md-2">
@@ -251,15 +252,15 @@
 							</span>
 						</div>
 					</div>
-				</div>
+				 --></div>
 
 				<!-- Shipping form -->
 				<div id="shipping_form" class="col-md-12 shipping_order active">
-					<div class="no_order">
+					<!-- <div class="no_order">
 						<img class="img-no_order" src="./assets/img/no_order.png" alt="">
 						<span class="titler-no_order">Chưa có đơn hàng</span>
 					</div>
-				</div>
+				 --></div>
 
 				<!-- Shipped form -->
 				<div id="shipped_form" class="col-md-12 shipped_order active">
@@ -268,7 +269,7 @@
                         <span class="titler-no_order">Chưa có đơn hàng</span>
                     </div> -->
 
-					<div class="item_order">
+					<!-- <div class="item_order">
 						<div class="col-md-12 header_order">Đã giao</div>
 						<div class="col-md-12 body_order">
 							<div class="col-md-2">
@@ -291,7 +292,7 @@
 							</span>
 						</div>
 					</div>
-				</div>
+				 --></div>
 
 				<!-- Cancel form -->
 				<div id="cancel_form" class="col-md-12 cancel_order active">
@@ -300,7 +301,7 @@
                         <span class="titler-no_order">Chưa có đơn hàng</span>
                     </div> -->
 
-					<div class="item_order">
+					<!-- <div class="item_order">
 						<div class="col-md-12 header_order">Đã huỷ</div>
 						<div class="col-md-12 body_order">
 							<div class="col-md-2">
@@ -334,10 +335,12 @@
 							</span>
 						</div>
 					</div>
-				</div>
+				 --></div>
 			</div>
 		</div>
 	</div>
+	
+	<script src="./assets/javascript/UserInfo.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

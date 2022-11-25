@@ -84,10 +84,18 @@
 										</a> <a class="dropdown-item" href="Logout">Đăng xuất</a>
 									</div></li>
 							</c:if>
-							<li class="nav-item"><a class="nav-link nav-link--cart"
-								href="showCart"> <i class="fa-solid fa-cart-shopping"></i> <span
-									class="cart_title">Giỏ hàng</span>
-							</a></li>
+							<c:if test="${sessionScope.account != null}">
+								<li class="nav-item"><a class="nav-link nav-link--cart"
+									href="showCart"> <i class="fa-solid fa-cart-shopping"></i>
+										<span class="cart_title">Giỏ hàng</span>
+								</a></li>
+							</c:if>
+							<c:if test="${sessionScope.account == null}">
+								<li class="nav-item"><a class="nav-link nav-link--cart"
+									href="layout-Login?mask=login"> <i class="fa-solid fa-cart-shopping"></i>
+										<span class="cart_title">Giỏ hàng</span>
+								</a></li>
+							</c:if>
 						</ul>
 					</div>
 				</div>

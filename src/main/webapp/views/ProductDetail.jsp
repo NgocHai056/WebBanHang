@@ -13,10 +13,6 @@
 
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 <link rel="stylesheet"
 	href="<c:url value="./assets/css/product_detail.css"></c:url>">
 
@@ -27,26 +23,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6">
-					<div id="slider" class="owl-carousel product-slider">
-						<div class="item">
-							<img src="${productDetail.image}" />
-						</div>
-						<c:forEach items="${pdImage}" var="img">
-							<div class="item">
-								<img src="${img.product_image}" />
-							</div>
-						</c:forEach>
-					</div>
-					<div id="thumb" class="owl-carousel product-thumb">
-						<div class="item thumb-item">
-							<img src="${productDetail.image}" />
-						</div>
-						<c:forEach items="${pdImage}" var="img">
-							<div class="item thumb-item">
-								<img src="${img.product_image}" />
-							</div>
-						</c:forEach>
-					</div>
+					<img class="col-md-12" src="${productDetail.image}" />
 				</div>
 				<div class="col-md-6">
 					<div class="product-dtl">
@@ -69,18 +46,20 @@
 							</div>
 							<div class="product-price-discount">
 								<span style="color: var(- -primary-color);"><fmt:formatNumber
-										type="number" pattern="#,###"
-										value="${productDetail.price}"></fmt:formatNumber>đ</span>
+										type="number" pattern="#,###" value="${productDetail.price}"></fmt:formatNumber>đ</span>
 								<span class="line-through"><fmt:formatNumber
 										type="number" pattern="#,###"
-										value="${productDetail.price - (productDetail.price * productDetail.id_discount) / 100}"></fmt:formatNumber>đ</span>
+										value="${productDetail.price + productDetail.price * 0.1}"></fmt:formatNumber>đ</span>
 							</div>
 						</div>
 						<p></p>
 
 						<div class="row">
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<label for="size">Hình thức bìa: ${cover.type_name}</label>
+							</div>
+							<div class="col-md-6">
+								<label for="size">Số lượng hiện có: ${productDetail.quantity}</label>
 							</div>
 							<div class="col-md-6">
 								<label for="color"></label>
@@ -89,13 +68,37 @@
 
 						<div class="product-count">
 							<label for="size">Số lượng</label>
+							<input id="checkAmount" type="hidden" value="${productDetail.quantity}"/>
 							<form action="#" class="display-flex">
-								<div class="qtyminus">-</div>
-								<input type="text" name="quantity" value="1" class="qty">
-								<div class="qtyplus">+</div>
+								<div id="sub" class="qtyminus">-</div>
+								<input type="text" id="quantity" name="quantity" value="1"
+									class="qty">
+								<div id="plus" class="qtyplus">+</div>
 							</form>
-							<a href="#" class="round-pink-btn">Thêm vào giỏ hàng</a> <a
-								href="#" class="round-pink-btn">Mua ngay</a>
+							<c:if test="${sessionScope.account == null}">
+								<c:if test="${productDetail.quantity > 0}">
+									<a href="layout-Login?mask=login" class="round-pink-btn">Thêm
+										vào giỏ hàng</a>
+									<a href="layout-Login?mask=login" class="round-pink-btn">Mua
+										ngay</a>
+								</c:if>
+								<c:if test="${productDetail.quantity == 0}">
+									<a href="layout-Login?mask=login" class="round-pink-btn">Hết
+										hàng</a>
+								</c:if>
+							</c:if>
+							<c:if test="${sessionScope.account != null}">
+								<c:if test="${productDetail.quantity > 0}">
+									<a type="submit" onclick="buy('${productDetail.id}')"
+										class="round-pink-btn">Thêm vào giỏ hàng</a>
+									<a href="layout-Payment" onclick="buy('${productDetail.id}')"
+										class="round-pink-btn">Mua ngay</a>
+								</c:if>
+								<c:if test="${productDetail.quantity == 0}">
+									<a class="round-pink-btn">Hết
+										hàng</a>
+								</c:if>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -152,7 +155,6 @@
 
 	<!--Import jQuery before materialize.js-->
 
-	<script defer src="plugins/OwlCarousel2.3/owl.carousel.min.js"></script>
 	<script type="text/javascript"
 		src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script
@@ -160,20 +162,9 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.14.0/sweetalert2.all.min.js"></script>
 
-	<script>
-		$("#owl-demo").owlCarousel({
-			navigation : true
-		});
+
+	<script type="text/javascript">
 		
-		jQuery(function(slider.owlCarousel){
-			items: 1,
-	        slideSpeed: 2000,
-	        nav: false,
-	        autoplay: false, 
-	        dots: false,
-	        loop: true,
-	        responsiveRefreshRate: 200
-	        });
 	</script>
 
 	<script
@@ -181,8 +172,7 @@
 		integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"

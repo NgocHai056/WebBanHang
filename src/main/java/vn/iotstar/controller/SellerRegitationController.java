@@ -20,7 +20,7 @@ public class SellerRegitationController extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
 
-		req.getRequestDispatcher("/views/Seller.jsp").forward(req, resp);
+		req.getRequestDispatcher("/viewSeller/SellerTrangchu.jsp").forward(req, resp);
 	}
 
 	@Override

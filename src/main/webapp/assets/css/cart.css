@@ -25,4 +25,10 @@
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
   }
+  
+  .text-end {
+  	display: flex;
+    justify-content: center;
+    font-size: 30px;
+  }
 }
