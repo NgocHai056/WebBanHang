@@ -10,6 +10,7 @@
 
 </head>
 <body>
+	<div id = "toast"></div>
 	<div class="container">
 
 		<!-- Swiper -->
@@ -99,25 +100,37 @@
 											<h6 class="card-title home-product-item__name">${pd.productName}</h6>
 											<div class="home-product-item__price">
 												<span class="home-product-item__price-old"><fmt:formatNumber
-														type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ</span>
-												<span class="home-product-item__price-current"> <fmt:formatNumber
 														type="number" pattern="#,###"
-														value="${pd.price - (pd.price * pd.id_discount) / 100}"></fmt:formatNumber>đ
+														value="${pd.price + pd.price*0.1}"></fmt:formatNumber>đ</span> <span
+													class="home-product-item__price-current"> <fmt:formatNumber
+														type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ
 												</span>
 											</div>
-										</div> <c:if test="${pd.id_discount != 0}">
+										</div> <%-- <c:if test="${pd.id_discount != 0}">
 											<div class="home-product-item__sale-off">${pd.id_discount}%</div>
-										</c:if>
+										</c:if> --%>
 									</a>
 
 									<div class="card-body card-btn">
 										<c:if test="${sessionScope.account != null}">
-											<a type="submit" onclick="buy('${pd.id}')" class="card-link">Thêm
-												vào giỏ hàng</a>
+											<c:if test="${pd.quantity > 0}">
+												<a type="submit"
+													onclick="buy('${pd.id}'); showSuccessToast();"
+													class="card-link btn--success">Thêm vào giỏ hàng</a>
+											</c:if>
+											<c:if test="${pd.quantity == 0}">
+												<a class="card-link btn--danger" onclick="showErrorToast()">Hết hàng</a>
+											</c:if>
 										</c:if>
 										<c:if test="${sessionScope.account == null}">
-											<a href="layout-Login?mask=login" class="card-link">Thêm vào giỏ
-												hàng</a>
+											<c:if test="${pd.quantity > 0}">
+												<a href="layout-Login?mask=login" class="card-link">Thêm
+													vào giỏ hàng</a>
+											</c:if>
+											<c:if test="${pd.quantity == 0}">
+												<a href="layout-Login?mask=login" onclick="showErrorToast()" class="card-link btn--danger">Hết
+													hàng</a>
+											</c:if>
 										</c:if>
 									</div>
 								</div>
@@ -147,15 +160,15 @@
 											<h6 class="card-title home-product-item__name">${pd.productName}</h6>
 											<div class="home-product-item__price">
 												<span class="home-product-item__price-old"><fmt:formatNumber
-														type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ</span>
-												<span class="home-product-item__price-current"> <fmt:formatNumber
 														type="number" pattern="#,###"
-														value="${pd.price - (pd.price * pd.id_discount) / 100}"></fmt:formatNumber>đ
+														value="${pd.price + pd.price*0.1}"></fmt:formatNumber>đ</span> <span
+													class="home-product-item__price-current"> <fmt:formatNumber
+														type="number" pattern="#,###" value="${pd.price}"></fmt:formatNumber>đ
 												</span>
 											</div>
-										</div> <c:if test="${pd.id_discount != 0}">
+										</div> <%-- <c:if test="${pd.id_discount != 0}">
 											<div class="home-product-item__sale-off">${pd.id_discount}%</div>
-										</c:if>
+										</c:if> --%>
 									</a>
 
 									<div class="card-body card-btn">
@@ -164,8 +177,8 @@
 												vào giỏ hàng</a>
 										</c:if>
 										<c:if test="${sessionScope.account == null}">
-											<a href="layout-Login?mask=login" class="card-link">Thêm vào giỏ
-												hàng</a>
+											<a href="layout-Login?mask=login" class="card-link">Thêm
+												vào giỏ hàng</a>
 										</c:if>
 									</div>
 								</div>
@@ -208,7 +221,7 @@
 		function LoadMore() {
 			var amount = document.getElementsByClassName("newbook").length;
 			$.ajax({
-				url : "/WebBanHang/load",
+				url : "/WebBanHang/layout-load",
 				type : "get",
 				data : {
 					exist : amount,
@@ -221,6 +234,83 @@
 			});
 		}
 	</script>
+
+	<script>
+		function showSuccessToast() 
+	    {
+	      const main = document.getElementById('toast');
+	        if (main) {
+	            const toast = document.createElement('div');
+	
+	            const autoRemoveId = setTimeout(function() {
+	                main.removeChild(toast);
+	            }, 1000);
+	
+	            toast.onclick = function(e) {
+	                if (e.target.closest('.toast__close')){
+	                    main.removeChild(toast);
+	                    clearTimeout(autoRemoveId);
+	                }
+	            }
+	
+	            toast.classList.add('toast', `toast--success`);
+	            toast.style.animation = `slideInLeft ease 0.3s forwards, fadeOut linear 1s 0.3s forwards`;
+	
+	            toast.innerHTML = `
+	                <div class="toast__icon"> 
+	                    <i class="fa-solid fa-circle-check"}"></i>
+	                </div>
+	                <div class="toast__body">
+	                    <h3 class="toast__title">Thành công</h3>
+	                    <p class="toast__msg">Đã thêm vào giỏ hàng</p>
+	                </div>
+	                <div class="toast__close">
+	                    <i class="fa-solid fa-xmark"></i>
+	                </div>
+	            `;
+	            main.appendChild(toast);
+	
+	        	}
+	    	}
+	    	
+	    	function showErrorToast() 
+		    {
+		      const main = document.getElementById('toast');
+		        if (main) {
+		            const toast = document.createElement('div');
+		
+		            const autoRemoveId = setTimeout(function() {
+		                main.removeChild(toast);
+		            }, 1000);
+		
+		            toast.onclick = function(e) {
+		                if (e.target.closest('.toast__close')){
+		                    main.removeChild(toast);
+		                    clearTimeout(autoRemoveId);
+		                }
+		            }
+		
+		            toast.classList.add('toast', `toast--error`);
+		            toast.style.animation = `slideInLeft ease 0.3s forwards, fadeOut linear 1s 0.3s forwards`;
+		
+		            toast.innerHTML = `
+		                <div class="toast__icon"> 
+		                    <i class="fa-solid fa-circle-exclamation"}"></i>
+		                </div>
+		                <div class="toast__body">
+		                    <h3 class="toast__title">Thất bại</h3>
+		                    <p class="toast__msg">Không thể thêm vào giỏ hàng</p>
+		                </div>
+		                <div class="toast__close">
+		                    <i class="fa-solid fa-xmark"></i>
+		                </div>
+		            `;
+		            main.appendChild(toast);
+		
+		        	}
+		    	}
+	</script>
+	
 
 	<!-- Swiper JS -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

@@ -37,18 +37,22 @@ public class LoginGoogleHandler extends HttpServlet {
 		System.out.println(user);
 		
 		HttpSession session = request.getSession();
-		session.setAttribute("account", user);
+			
 		session.setAttribute("name", user.getName());
 		session.setAttribute("email", user.getEmail());
 		
 		UserDAO userDAO = new UserDAO();
 		UserModel userModel = userDAO.getUser(user.getEmail());
+		
 		if(userModel == null) {
 			userModel = new UserModel();
 			userModel.setUsers_username(user.getEmail());
 			userModel.setUsers_last_name(user.getFamily_name());
 			userDAO.insertUserGG(userModel);
 		}
+		userModel = userDAO.getUser(user.getEmail());
+		session.setAttribute("account", userModel);	
+		session.setAttribute("idUser", userModel.getUserID());
 		response.sendRedirect("home");
 	}
 

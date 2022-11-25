@@ -43,12 +43,15 @@ public class SignupController extends HttpServlet {
 		
 		// Flag is 0 to signup user account, 1 to signup seller
 		if (userModel == null && flag.equals("0")) {
-			System.out.println(userModel);
+			String name = req.getParameter("fullname");
+			
 			int otp = new SMSOTP().genOTP(6, userName);
 			mySession.setAttribute("otp", otp);
 			mySession.setAttribute("mask", "SMS");
 			mySession.setAttribute("userName", userName);
 			mySession.setAttribute("pass", password);
+			mySession.setAttribute("fullname", name);	
+
 			RequestDispatcher rd = req.getRequestDispatcher("EnterOtp.jsp");
 			rd.forward(req, resp);
 			

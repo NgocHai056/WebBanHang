@@ -53,6 +53,7 @@ public class LoginAccountControl extends HttpServlet {
 		if (userModel != null) {
 			mySession.setAttribute("account", userModel);
 			mySession.setAttribute("email", userName);
+			mySession.setAttribute("idUser", userModel.getUserID());
 			mySession.setAttribute("name", userModel.getUsers_first_name() + " " + userModel.getUsers_last_name());
 
 			CartDAO cartDAO = new CartDAO();

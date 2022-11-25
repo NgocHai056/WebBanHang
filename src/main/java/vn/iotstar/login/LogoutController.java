@@ -23,6 +23,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("account");
 		session.removeAttribute("email");
+		session.removeAttribute("idUser");
 		session.removeAttribute("cart");
 		response.sendRedirect("home");
 	}

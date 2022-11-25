@@ -16,7 +16,7 @@ import vn.iotstar.model.ProductModel;
 /**
  * Servlet implementation class LoadMoreController
  */
-@WebServlet("/load")
+@WebServlet("/layout-load")
 public class LoadMoreController extends HttpServlet {
     
 	private static final long serialVersionUID = 1L;
@@ -43,17 +43,15 @@ public class LoadMoreController extends HttpServlet {
                     + "                                        <div class=\"card-body\">\r\n"
                     + "                                            <h6 class=\"card-title home-product-item__name\">"+pd.getProductName()+"</h6>\r\n"
                     + "                                            <div class=\"home-product-item__price\">\r\n"
-                    + "                                                <span class=\"home-product-item__price-old\"><fmt:formatNumber\r\n"
-                    + "                                                        type=\"number\" pattern=\"#,###\"\r\n"
-                    + "                                                        value=\""+pd.getPrice()+"\"></fmt:formatNumber></span> <span\r\n"
+                    + "                                                <span class=\"home-product-item__price-old\">\r\n"
+                    + "                                                        \r\n"
+                    + "                                                        "+(pd.getPrice() + (pd.getPrice() * 0.1))+"</span> <span\r\n"
                     + "                                                    class=\"home-product-item__price-old\">đ</span> <span\r\n"
-                    + "                                                    class=\"home-product-item__price-current\"><fmt:formatNumber\r\n"
-                    + "                                                        type=\"number\" pattern=\"#,###\"\r\n"
-                    + "                                                        value=\""+pd.getPrice()+" - ("+pd.getPrice()+" * "+pd.getId_discount()+") / 100}\"></fmt:formatNumber>đ</span>\r\n"
+                    + "                                                    class=\"home-product-item__price-current\">\r\n"
+                    + "                                                       \r\n"
+                    + "                                                        "+pd.getPrice() +"đ</span>\r\n"
                     + "                                            </div>\r\n"
-                    + "                                        </div> <c:if test=\""+pd.getId_discount()+" != 0}\">\r\n"
-                    + "                                            <div class=\"home-product-item__sale-off\">"+pd.getId_discount()+"%</div>\r\n"
-                    + "                                        </c:if>\r\n"
+                    + "                                        </div> \r\n"
                     + "                                    </a>\r\n"
                     + "\r\n"
                     + "                                    <div class=\"card-body card-btn\">\r\n"

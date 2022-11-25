@@ -18,7 +18,7 @@ import vn.iotstar.model.ProductModel;
 /**
  * Servlet implementation class CategoryController
  */
-@WebServlet("/Category")
+@WebServlet(urlPatterns = {"/Category", "/category"})
 public class CategoryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,14 +30,30 @@ public class CategoryController extends HttpServlet {
 
 		CategoryDAO categoryDAO = new CategoryDAO();
 		ProductDAO productDAO = new ProductDAO();
+		
 		String cgID = req.getParameter("cid");
+		String indexPage = req.getParameter("index");
+		if(indexPage == null){
+			indexPage = "1";
+		}
+		
+		int index = Integer.parseInt(indexPage);
+		int count = categoryDAO.getTotalProduct(cgID);
+		int endPage = count / 10;
+		if(count % 10 != 0){
+			endPage++;
+		}
 
 		// Lay danh sach san pham
 		List<ProductModel> listGetProductsByID = categoryDAO.getProductsByID(cgID);
 		List<CategoryModel> listCategorys = categoryDAO.getAllCategory();
+		List<ProductModel> listPagingProduct = categoryDAO.pagingCategory(cgID, index);
 		CategoryModel categoryName = categoryDAO.getCategoryName(cgID);
-
-		req.setAttribute("listAllProducts", listGetProductsByID);
+		
+		req.setAttribute("endP", endPage);
+		req.setAttribute("tag", index);
+		req.setAttribute("ListP", listPagingProduct);
+		
 		req.setAttribute("listCategory", listCategorys);
 		req.setAttribute("categoryName", categoryName);
 		RequestDispatcher rd = req.getRequestDispatcher("/views/Category.jsp");

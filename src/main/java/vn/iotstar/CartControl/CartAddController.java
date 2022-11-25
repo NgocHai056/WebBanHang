@@ -71,7 +71,7 @@ public class CartAddController extends HttpServlet {
             int flag = 0;
             for(CartItemsModel items : cartItemsModel) {
             	if(items.getProduct().getId() == Integer.parseInt(pId)) {
-            		items.setQuantity(items.getQuantity() + 1);
+            		items.setQuantity(items.getQuantity() + Integer.parseInt(quantity));
             		cartItemsDAO.edit(items);
             		flag = 1;
             		break;

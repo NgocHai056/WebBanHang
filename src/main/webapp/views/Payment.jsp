@@ -52,19 +52,23 @@
 			<div class="col-md-4 order-md-2 mb-4">
 				<h4 class="d-flex justify-content-between align-items-center mb-3">
 					<span class="text-muted">Sản phẩm của bạn</span> <span
-						class="badge badge-secondary badge-pill">${list.size() }</span>
+						class="badge badge-secondary badge-pill">${sessionScope.cart.size() }</span>
 				</h4>
 				<ul class="list-group mb-3">
-					<c:forEach items="${list}" var="pd">
-						<li
+					<c:forEach items="${sessionScope.cart}" var="map">						
+						<li id="listPD"
 							class="list-group-item d-flex justify-content-between lh-condensed">
 							<div>
-								<h6 class="my-0">${pd.product_name}</h6>
+								<h6 class="my-0">${map.value.product.productName}</h6>
 								<!-- <small class="text-muted">Mô tả</small> -->
 							</div> <span class="text-muted"><fmt:formatNumber type="number"
 									pattern="#,###"
-									value="${pd.product_listed_price * pd.product_Amount}"></fmt:formatNumber>
+									value="${map.value.product.price * map.value.quantity}"></fmt:formatNumber>
 								đ</span>
+							<input id="price" type="hidden" value="${map.value.product.price * map.value.quantity}"/>
+							<input id="id" type="hidden" value="${map.value.product.id}"/>
+							<input id="quantity" type="hidden" value="${map.value.quantity }"/>
+							<input id="idCart" type="hidden"  value="${map.value.cart.cart_id }"/>
 						</li>
 					</c:forEach>
 
@@ -76,10 +80,17 @@
                         <span class="text-success">-25.000 đ</span>
                     </li> -->
 
+					<c:set var="total" value="${0}" />
+					<c:forEach items="${sessionScope.cart}" var="map">
+						<c:set var="total"
+							value="${total +map.value.quantity * map.value.product.price}"></c:set>
+					</c:forEach>
 					<li class="list-group-item d-flex justify-content-between"><span>Tổng</span>
 						<strong><fmt:formatNumber type="number" pattern="#,###"
 								value="${total}"></fmt:formatNumber>đ</strong></li>
+					
 				</ul>
+					<input id="totalPrice" type="hidden" value="${total}"/>
 				<!-- <form action="authorize_payment" method="post">
 					<table>
 						<tr>
@@ -121,25 +132,27 @@
 			</div>
 			<div class="col-md-8 order-md-1">
 				<h4 class="mb-3">Thông tin thanh toán</h4>
-				<form action="authorize_payment" method="post" class="needs-validation" novalidate>
+				<form action="" method="get"
+					class="needs-validation" novalidate>
+					<input type="hidden" id="idUser" value="${sessionScope.idUser}"/>
 					<div class="mb-3">
 						<!-- <label for="firstName">Họ và tên</label> -->
 						<input type="text" class="form-control" id="firstName"
-							placeholder="Họ và tên" value="" required>
+							placeholder="Họ và tên" value="${sessionScope.account.users_last_name} ${sessionScope.account.users_first_name}" required>
 						<div class="invalid-feedback">Vui lòng điền họ và tên.</div>
 					</div>
 
 					<div class="mb-3">
 						<!-- <label for="email">Email <span class="text-muted"></span></label> -->
 						<input type="email" class="form-control" id="email"
-							placeholder="Email" required>
+							placeholder="Email" value="${sessionScope.account.users_email }" required>
 						<div class="invalid-feedback">Vui lòng điền email của bạn.</div>
 					</div>
 
 					<div class="mb-3">
 						<!-- <label for="email">Email <span class="text-muted"></span></label> -->
 						<input type="tel" class="form-control" id="tel"
-							placeholder="Số điện thoại" required>
+							placeholder="Số điện thoại" value="${sessionScope.account.users_phone }"  required>
 						<div class="invalid-feedback">Vui lòng điền số điện thoại
 							của bạn.</div>
 					</div>
@@ -147,12 +160,12 @@
 					<div class="mb-3">
 						<!-- <label for="address">Địa chỉ</label> -->
 						<input type="text" class="form-control" id="address"
-							placeholder="Địa chỉ" required>
+							placeholder="Địa chỉ" required value="${sessionScope.account.users_shipping_address }" >
 						<div class="invalid-feedback">Vui lòng điền địa chỉ.</div>
 					</div>
 
 					<div class="row">
-						<div class="col-md-4 mb-3">
+						<!-- <div class="col-md-4 mb-3">
 							<select name="ls_province" class="custom-select d-block w-100"
 								id="province" required>
 							</select>
@@ -169,11 +182,11 @@
 								id="ward" required>
 							</select>
 							<div class="invalid-feedback">Vui lòng chọn phường/xã.</div>
-						</div>
+						</div> -->
 					</div>
 					<hr class="mb-4">
 
-					<h4 class="mb-3">Thanh toán</h4>
+					<!-- <h4 class="mb-3">Thanh toán</h4>
 
 					<div class="d-block my-3">
 						<div class="custom-control custom-radio">
@@ -183,18 +196,13 @@
 								nhận hàng</label>
 						</div>
 						<div class="custom-control custom-radio">
-							<input id="Bank" name="paymentMethod" type="radio"
-								class="custom-control-input" required> <label
-								class="custom-control-label" for="Bank">Chuyển khoản qua
-								ngân hàng</label>
-						</div>
-						<div class="custom-control custom-radio">
 							<input id="ATM" name="paymentMethod" type="radio"
 								class="custom-control-input" required> <label
 								class="custom-control-label" for="ATM">Thẻ
 								ATM/Visa/Master/JCB/QR Pay qua cổng VNPAY</label>
 						</div>
-					</div>
+					</div> -->
+					
 					<!-- <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="cc-name">Name on card</label>
@@ -228,15 +236,17 @@
                             </div>
                         </div>
                     </div> -->
-					<hr class="mb-4">
-					<button class="btn btn-primary btn-lg btn-block btn-payment"
-						type="submit">Thanh toán</button>
+					<!-- <hr class="mb-4"> -->
+					<div id="paymentMethod" class="btn btn-primary btn-lg btn-block btn-payment"
+						>Thanh toán</div>
 				</form>
 			</div>
 		</div>
 
 
 	</div>
+	<script type="text/javascript" src="./assets/javascript/payment.js"></script>
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

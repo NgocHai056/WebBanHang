@@ -25,8 +25,10 @@ public class LoginController extends HttpServlet {
 		
 		if(mask.equals("login")) {
 			req.setAttribute("mask", 1);
-		}else {
+		}else if(mask.equals("signup")){
 			req.setAttribute("mask", 0);
+		}else {
+			req.setAttribute("mask", 2);
 		}
 		req.getRequestDispatcher("/views/Login.jsp").forward(req, resp);
 	}
