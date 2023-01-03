@@ -1,6 +1,6 @@
 # WebBanHang
 
-Xây dựng website bán sách sử dụng JSP Servlet, Java(Spring Boot) theo mô hình MVC.
+Xây dựng website bán sách sử dụng **JSP Servlet**, **Java(Spring Boot)** theo mô hình MVC.
 
 Chức năng **chung**:
 * Trang chủ hiển thị các sản phẩm.
@@ -21,6 +21,7 @@ Chức năng **ADMIN**:
 * Quản lý tài khoản người dùng.
 
 
+# Screenshot
 ## Chức năng chính
 ![alt](https://github.com/NgocHai056/WebBanHang/blob/main/screenshot/ChucNangChinh.png)
 
