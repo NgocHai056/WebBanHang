@@ -1,6 +1,6 @@
 # WebBanHang
 
-Xây dựng website bán sách sử dụng JSP Servlet, Java(Spring Boot).
+Xây dựng website bán sách sử dụng JSP Servlet, Java(Spring Boot) theo mô hình MVC.
 
 Chức năng **chung**:
 * Trang chủ hiển thị các sản phẩm.
@@ -9,9 +9,9 @@ Chức năng **chung**:
 * Trang chi tiết sản phẩm.
 
 Chức năng **SELLER**:
-Thống kê số lượng bán ra, doanh thu.
-Danh sách sản phẩm, thêm, sửa, xoá sản phẩm.
-Danh sách đơn hàng, xử lý đơn hàng.
+* Thống kê số lượng bán ra, doanh thu.
+* Danh sách sản phẩm, thêm, sửa, xoá sản phẩm.
+* Danh sách đơn hàng, xử lý đơn hàng.
 
 Chức năng **Shipper**:
 * Danh sách đơn hàng, xác nhận giao hàng, giao hàng.
