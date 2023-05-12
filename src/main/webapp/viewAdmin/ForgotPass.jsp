@@ -44,15 +44,15 @@
                                         <h1 class="h4 text-gray-900 mb-2">Khổi phục mật khẩu</h1>
                                         <p class="mb-4">Mật khẩu mới sẽ được gửi về email của bạn.</p>
                                     </div>
-                                    <form class="user">
+                                    <form action="layout-forgotPassword?mask=1" method="POST" class="user">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
+                                            <input name="email" type="text" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Email/SĐT">
+                                                placeholder="Tên tài khoản" required>
                                         </div>
-                                        <a href="#" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Gửi
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

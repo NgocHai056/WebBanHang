@@ -27,6 +27,12 @@
 			<i class="fa-regular fa-address-card"></i> <span>Quản lý tài
 				khoản</span>
 	</a></li>
+	
+	<!-- Nav Item -->
+	<li class="nav-item"><a class="nav-link" href="admin-typeProduct">
+			<i class="fa-regular fa-address-book"></i> <span>Quản lý loại
+				sản phẩm</span>
+	</a></li>
 
 	<li class="nav-item"><a class="nav-link" href="admin-product"> <i
 			class="fa-solid fa-boxes-stacked"></i> <span>Quản lý sản phẩm</span></a>

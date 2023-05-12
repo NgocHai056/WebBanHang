@@ -32,7 +32,6 @@ btn.addEventListener('click', function() {
 			})
 			.then((data) => {
 				console.log(data)
-				alert("Lưu thành công!!!")
 			});
 	}
 })

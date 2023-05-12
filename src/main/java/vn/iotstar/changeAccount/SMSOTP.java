@@ -13,7 +13,7 @@ public class SMSOTP {
 	// Find your Account SID and Auth Token at twilio.com/console
 	// and set the environment variables. See http://twil.io/secure
 	public static final String ACCOUNT_SID = "AC4e56c514e6bc9b76e8885ac7771da4c7";
-	public static final String AUTH_TOKEN = "d10b1079549a2fdd144799c107f29ef7";
+	public static final String AUTH_TOKEN = "243211e1c12918f27bf379feb172191d";
 
 	public int genOTP(int otpLen, String phoneNumber) {
 		Random random = new Random();

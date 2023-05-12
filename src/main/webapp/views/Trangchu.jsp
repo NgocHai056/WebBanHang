@@ -170,15 +170,28 @@
 											<div class="home-product-item__sale-off">${pd.id_discount}%</div>
 										</c:if> --%>
 									</a>
-
+									
+									
 									<div class="card-body card-btn">
 										<c:if test="${sessionScope.account != null}">
-											<a type="submit" onclick="buy('${pd.id}')" class="card-link">Thêm
-												vào giỏ hàng</a>
+											<c:if test="${pd.quantity > 0}">
+												<a type="submit"
+													onclick="buy('${pd.id}'); showSuccessToast();"
+													class="card-link btn--success">Thêm vào giỏ hàng</a>
+											</c:if>
+											<c:if test="${pd.quantity == 0}">
+												<a class="card-link btn--danger" onclick="showErrorToast()">Hết hàng</a>
+											</c:if>
 										</c:if>
 										<c:if test="${sessionScope.account == null}">
-											<a href="layout-Login?mask=login" class="card-link">Thêm
-												vào giỏ hàng</a>
+											<c:if test="${pd.quantity > 0}">
+												<a href="layout-Login?mask=login" class="card-link">Thêm
+													vào giỏ hàng</a>
+											</c:if>
+											<c:if test="${pd.quantity == 0}">
+												<a href="layout-Login?mask=login" onclick="showErrorToast()" class="card-link btn--danger">Hết
+													hàng</a>
+											</c:if>
 										</c:if>
 									</div>
 								</div>

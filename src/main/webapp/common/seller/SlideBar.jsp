@@ -21,9 +21,9 @@
 	<hr class="sidebar-divider my-0">
 
 	<!-- Nav Item - Dashboard -->
-	<li class="nav-item active"><a class="nav-link"
+	<!-- <li class="nav-item active"><a class="nav-link"
 		href="seller-register-complete""> <i
-			class="fas fa-fw fa-tachometer-alt"></i> <span>Trang chủ</span></a></li>
+			class="fas fa-fw fa-tachometer-alt"></i> <span>Trang chủ</span></a></li> -->
 
 	<li class="nav-item"><a class="nav-link" href="vendor-profile">
 			<i class="fas fa-fw fa-tachometer-alt"></i> <span>Hồ sơ Shop</span>
@@ -37,11 +37,6 @@
 			<i class="fas fa-fw fa-table"></i> <span>Quản lý đơn hàng</span>
 	</a></li>
 
-	<!-- Nav Item -->
-	<li class="nav-item"><a class="nav-link" href="vendor-typeProduct">
-			<i class="fa-regular fa-address-book"></i> <span>Quản lý loại
-				sản phẩm</span>
-	</a></li>
 
 	<!-- Nav Item -->
 	<li class="nav-item"><a class="nav-link" href="vendor-produce">

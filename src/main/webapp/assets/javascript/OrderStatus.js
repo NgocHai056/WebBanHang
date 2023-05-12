@@ -58,7 +58,32 @@ function renderOrderinfo(data, id) {
 			var formatSum = items.priceTotal.toLocaleString('de-DE', { style: 'currency', currency: 'VND' });
 
 			if (index != arr.length - 1) {
-				if (arr[index].order.id == arr[index + 1].order.id) {
+				if(index == 0){					
+					$(list).append(`
+						<div class="item_order"> 
+							<div class="col-md-12 header_order">${items.status.statusName}</div>
+							<div class="col-md-12 body_order">
+								<div class="col-md-2">
+									<img class="body_img"
+										src="${items.product.image}"
+										alt="">
+								</div>
+								<div class="col-md-10 body_content">
+									<span class="content_item body_name">${items.product.productName}</span>
+									<span class="content_item body_quantity">x${items.amount}</span>
+									<span class="content_item body_quantity">${formatPrice}</span>
+								</div>
+							</div>
+							<div class="col-md-12 footer_order">
+								<div class="footer_item">
+									Tổng số tiền:
+								<div class="total">${formatSum}</div>
+							</div>						
+						</div>							
+						`)
+						flag = 1;							
+				}
+				else if (arr[index].order.id == arr[index + 1].order.id) {
 					if (flag == 1) {
 						$(list).append(`
 						<div class="item_order"> 
@@ -106,9 +131,9 @@ function renderOrderinfo(data, id) {
 					}
 				}
 
-				else //index != index +1 
+				else //index.id != index.id +1 
 				{
-					if (index == 0) {
+					if (arr[index].order.id != arr[index - 1].order.id) {
 						$(list).append(`
 							<div class="item_order"> 
 								<div class="col-md-12 header_order">${items.status.statusName}</div>
@@ -131,6 +156,7 @@ function renderOrderinfo(data, id) {
 								</div>						
 							</div>							
 					`)
+					flag = 1;
 					}
 					else {
 						$(list).append(`
@@ -158,6 +184,56 @@ function renderOrderinfo(data, id) {
 			}
 			else //index = length - 1
 			{
+				if(index == 0){					
+					$(list).append(`
+						<div class="item_order"> 
+							<div class="col-md-12 header_order">${items.status.statusName}</div>
+							<div class="col-md-12 body_order">
+								<div class="col-md-2">
+									<img class="body_img"
+										src="${items.product.image}"
+										alt="">
+								</div>
+								<div class="col-md-10 body_content">
+									<span class="content_item body_name">${items.product.productName}</span>
+									<span class="content_item body_quantity">x${items.amount}</span>
+									<span class="content_item body_quantity">${formatPrice}</span>
+								</div>
+							</div>
+							<div class="col-md-12 footer_order">
+								<div class="footer_item">
+									Tổng số tiền:
+								<div class="total">${formatSum}</div>
+							</div>						
+						</div>							
+						`)
+						flag = 1;							
+				}
+				else if (arr[index].order.id != arr[index - 1].order.id) {
+					$(list).append(`
+						<div class="item_order"> 
+							<div class="col-md-12 header_order">${items.status.statusName}</div>
+							<div class="col-md-12 body_order">
+								<div class="col-md-2">
+									<img class="body_img"
+										src="${items.product.image}"
+										alt="">
+								</div>
+								<div class="col-md-10 body_content">
+									<span class="content_item body_name">${items.product.productName}</span>
+									<span class="content_item body_quantity">x${items.amount}</span>
+									<span class="content_item body_quantity">${formatPrice}</span>
+								</div>
+							</div>
+							<div class="col-md-12 footer_order">
+								<div class="footer_item">
+									Tổng số tiền:
+								<div class="total">${formatSum}</div>
+							</div>						
+						</div>`)		
+						flag=1;			
+				}
+				else{
 				$(list).append(
 					`<div class="item_order"> 
 						<div class="col-md-12 body_order">
@@ -177,7 +253,8 @@ function renderOrderinfo(data, id) {
 							</div>					
 						</div>	
 					</div>`)
-
+					flag =1;
+				}
 			}
 		});
 

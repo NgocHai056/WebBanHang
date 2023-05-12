@@ -48,6 +48,7 @@ public class SignupController extends HttpServlet {
 			int otp = new SMSOTP().genOTP(6, userName);
 			mySession.setAttribute("otp", otp);
 			mySession.setAttribute("mask", "SMS");
+			mySession.setAttribute("roleShipper", "role");
 			mySession.setAttribute("userName", userName);
 			mySession.setAttribute("pass", password);
 			mySession.setAttribute("fullname", name);	
@@ -55,7 +56,21 @@ public class SignupController extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("EnterOtp.jsp");
 			rd.forward(req, resp);
 			
-		} else if (flag.equals("1")) {
+		} else if(userModel == null && flag.equals("3")) {
+			String name = req.getParameter("fullname");
+			
+			int otp = new SMSOTP().genOTP(6, userName);
+			mySession.setAttribute("otp", otp);
+			mySession.setAttribute("mask", "SMS");
+			mySession.setAttribute("roleShipper", "roleShipper");
+			mySession.setAttribute("userName", userName);
+			mySession.setAttribute("pass", password);
+			mySession.setAttribute("fullname", name);	
+
+			RequestDispatcher rd = req.getRequestDispatcher("EnterOtp.jsp");
+			rd.forward(req, resp);
+			
+		}else if (flag.equals("1")) {
 			/*
 			 * if(userAccount != null) { if(userAccount.getRole() == 1 ||
 			 * userAccount.getRole() == 2) { mySession.setAttribute("alert",

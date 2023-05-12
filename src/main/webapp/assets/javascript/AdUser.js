@@ -15,9 +15,11 @@ function getAllUser() {
 				var role = ""
 				if (value.role == 0)
 					role = "Người mua"
+				else if (value.role == -1)
+					role = "Dừng hoạt động"
 				else if (value.role == 3)
 					role = "Người giao hàng"
-				else if(value.role == 4)
+				else if (value.role == 4)
 					countinue
 				else
 					role = "Người bán"
@@ -32,11 +34,30 @@ function getAllUser() {
 		            <td>${value.users_email}</td>
 		            <td>${value.users_phone}</td>
 		            <td>${role}</td>
-		            <td><a href="#" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
+		            <td><a onclick="deleteUser('${value.users_username}')" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
 		     	</tr>  
-		            `)		      	
+		            `)
 			})
 
 		});
 }
 getAllUser()
+
+function deleteUser(id) {
+	console.log('hai')
+	if (confirm("Xác nhận xóa!") == true) {
+		$.ajax({
+			url: "/WebBanHang/admin-deleteUser",
+			type: "get",
+			data: {
+				idUser: id,
+			},
+			success: function(data) {
+				window.location.href = 'http://' + window.location.host + '/WebBanHang/admin-account'
+
+			},
+			error: function(xhr) {
+			}
+		});
+	}
+}

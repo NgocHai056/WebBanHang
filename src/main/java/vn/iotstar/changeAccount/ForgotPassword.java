@@ -74,6 +74,12 @@ public class ForgotPassword extends HttpServlet {
 			int otp = new SMSOTP().genOTP(6, email);
 			mySession.setAttribute("otp", otp);			
 			
+			String roleShipper = (String) request.getParameter("mask");
+			
+			if(roleShipper.equals("1"))
+				mySession.setAttribute("homeOrShip", "shipper");
+			else
+				mySession.setAttribute("homeOrShip", "home");
 			dispatcher = request.getRequestDispatcher("EnterOtp.jsp");
 			request.setAttribute("message", "OTP is sent to your email id");
 			// request.setAttribute("connection", con);

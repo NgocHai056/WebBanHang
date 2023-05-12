@@ -29,7 +29,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Quản lý tài khoản</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Quản lý sản phẩm</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -41,7 +41,9 @@
                                             <th>Mã sách</th>
                                             <th>Tên sách</th>
                                             <th>Thể loại</th>
+                                            <th>Số lượng</th>
                                             <th>Giá bán</th>
+                                            <th>Tình trạng</th>
                                             <th>Xoá</th>
                                         </tr>
                                     </thead>
@@ -50,7 +52,9 @@
                                             <th>Mã sách</th>
                                             <th>Tên sách</th>
                                             <th>Thể loại</th>
+                                            <th>Số lượng</th>
                                             <th>Giá bán</th>
+                                            <th>Tình trạng</th>
                                             <th>Xoá</th>
                                         </tr>
                                     </tfoot>

@@ -35,7 +35,7 @@ public class SellerController extends HttpServlet {
 
 		if (user != null) {
 			if (user.getRole() == 1 || user.getRole() == 2) {
-				req.getRequestDispatcher("/viewSeller/SellerTrangchu.jsp").forward(req, resp);
+				req.getRequestDispatcher("/viewSeller/SProfile.jsp").forward(req, resp);
 			}else {
 	    		req.getRequestDispatcher("/views/WelcomSeller.jsp").forward(req, resp);
 			}

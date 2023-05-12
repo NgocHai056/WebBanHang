@@ -20,7 +20,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-		<%@ include file="/common/seller/SlideBar.jsp"%>
+		<%@ include file="/common/admin/AdSlideBar.jsp"%>
 		
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -28,7 +28,7 @@
             <!-- Main Content -->
             <div id="content">
 				
-				<%@ include file="/common/seller/TopBar.jsp"%>
+				<%@ include file="/common/admin/AdTopBar.jsp"%>
 					
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -64,15 +64,15 @@
                                             <th>Xoá</th>
                                         </tr>
                                     </tfoot>
-                                    <tbody>
-                                        <tr>
+                                    <tbody id="idCateTable">
+                                        <!-- <tr>
                                             <td>1</td>
                                             <td>Sách thiếu nhi</td>
                                             <td><a href="#" class="btn btn-warning btn-circle"><i
                                                         class="fa-regular fa-pen-to-square"></i></a></td>
                                             <td><a href="#" class="btn btn-danger btn-circle"><i
                                                         class="fas fa-trash"></i></a></td>
-                                        </tr>
+                                        </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -107,15 +107,16 @@
     
                 <div class="mb-3 form_btn--save col-lg-12">
                     <span class="col-lg-2"></span>
-                    <button class="btn-pri btn-outline-success my-2 my-sm-0 btn-lg btn-block btn-save"
-                        type="submit">Thêm</button>
+                    <button id="btnLuu" class="btn-pri btn-outline-success my-2 my-sm-0 btn-lg btn-block btn-save"
+                        >Lưu</button>
                 </div>
             </form>
         </div>
     </div>
     <!-- End of Page Wrapper -->
 
-
+	<script src="./assets/javascript/AdTypeProduct.js"></script>
+	
     <!-- Custom scripts for all pages-->
     <script src="assestSeller/js/sb-admin-2.min.js"></script>
 
@@ -125,24 +126,5 @@
 
     <!-- Page level custom scripts -->
     <script src="assestSeller/js/demo/datatables-demo.js"></script>
-
-    <script>
-        const addBtn = document.querySelector('.js-btn-addTypeBook')
-        const modal = document.querySelector('.js-modal')
-        const closeBtn = document.querySelector('.js-btn-close')
-
-        function showFormAddTypeBook() {
-            modal.classList.remove('type_product');
-        }
-
-        function hideFormAddTypeBook() {
-            modal.classList.add('type_product');
-        }
-
-        addBtn.addEventListener('click', showFormAddTypeBook)
-
-        closeBtn.addEventListener('click', hideFormAddTypeBook)
-
-    </script>
 
 </body>

@@ -62,7 +62,7 @@ public class ProductDAO {
 		
 		String query = "SELECT TOP 10 id, productName, image, description, price, categoryID, discontinued, quantity, createAt, updateAt, per_discount, cover_id, storeID, id_NXB, DateXB, expiration, rating_count, average_rating "
 				+ "FROM   PRODUCT AS p INNER JOIN DISCOUNT AS d "
-				+ "ON p.id_discount = d.id_discount ORDER BY p.id DESC";
+				+ "ON p.id_discount = d.id_discount WHERE p.discontinued = 1 ORDER BY p.id DESC";
 		
 		try {
 			conn = new DBConnection().getConnection();		
@@ -134,7 +134,7 @@ public class ProductDAO {
 	public List<ProductModel> getProductsBySearch(String txtSearch) {
 		List<ProductModel> list = new ArrayList<>();
 		
-		String query = "SELECT * FROM PRODUCT WHERE productName LIKE ?";
+		String query = "SELECT * FROM PRODUCT WHERE productName LIKE ? AND discontinued = 1";
 		
 		try {
 			conn = new DBConnection().getConnection();

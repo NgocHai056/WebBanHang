@@ -116,6 +116,9 @@ btn.addEventListener('click', function() {
 					});
 			});
 	}
+	else{
+		alert("Vui lòng điền đầy đủ thông tin")
+	}
 })
 function createOrderItems() {
 	if (flag == 1) {

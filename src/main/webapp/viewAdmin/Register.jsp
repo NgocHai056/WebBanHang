@@ -39,34 +39,24 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Tạo tài khoản</h1>
                             </div>
-                            <form class="user">
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="Họ">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Tên">
-                                    </div>
+                            <form action="layout-Signup?mask=3" class="user" method="POST">
+                                <div class="form-group">
+                                        <input name="fullname" type="text" class="form-control form-control-user" id="exampleFirstName"
+                                            placeholder="Tên" required>
+                                   
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email/SĐT">
+                                    <input name="userName" type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                        placeholder="Tài khoản" required>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Mật khẩu">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Nhập lại mật khẩu">
-                                    </div>
+                                <div class="form-group">
+                                        <input name="password" type="password" class="form-control form-control-user"
+                                            id="exampleInputPassword" placeholder="Mật khẩu" required>
+                                   
                                 </div>
-                                <a href="layout-registerAdmin" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Đăng kí
-                                </a>
+                                </button>
                                 <hr>
                                 <a href="#" class="btn btn-google btn-user btn-block">
                                     <i class="fab fa-google fa-fw"></i> Đăng nhập với Google

@@ -45,15 +45,27 @@ public class ValidateOtp extends HttpServlet {
 			UserModel userModel = new UserModel();
 			userModel.setUsers_username(userName);
 			userModel.setUsers_pass_word(pass);
-			userModel.setRole(0);
+			String roleShipper = (String) session.getAttribute("roleShipper");
+			if(roleShipper.equals("roleShipper"))
+				userModel.setRole(3);
+			else
+				userModel.setRole(0);
 			userModel.setUsers_last_name(arrOfStr[0]);
 			userModel.setUsers_first_name(arrOfStr[1]);
 			userDAO.insertUsers(userModel);
 			
 			request.setAttribute("email", request.getParameter("email"));
 			request.setAttribute("status", "success");
-
-			response.sendRedirect("layout-Login?mask=login");
+			
+			if(roleShipper.equals("roleShipper")) {
+				
+				response.sendRedirect("layout-loginAdmin");
+			}				
+			else {
+				session.removeAttribute("roleShipper");
+				response.sendRedirect("layout-Login?mask=login");
+			}
+				
 
 		} else if (value == otp && mask.equals("Seller")) {
 			String userName = (String) session.getAttribute("email");

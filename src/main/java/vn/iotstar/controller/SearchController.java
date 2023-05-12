@@ -36,8 +36,9 @@ public class SearchController extends HttpServlet {
 		List<ProductModel> listGetProductsBySearch = productDAO.getProductsBySearch(txtSearch);
 		List<CategoryModel> listCategorys = categoryDAO.getAllCategory();
 		CategoryModel categoryName = categoryDAO.getCategoryName(cgID);
+		
 
-		req.setAttribute("listAllProducts", listGetProductsBySearch);
+		req.setAttribute("ListP", listGetProductsBySearch);
 		req.setAttribute("listCategory", listCategorys);
 		req.setAttribute("categoryName", categoryName);
 		req.setAttribute("tagSearch", txtSearch);

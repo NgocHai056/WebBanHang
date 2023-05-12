@@ -206,7 +206,7 @@
 											method="post">
 											<div class="form-group">
 												<input type="text" class="form-control email"
-													name="userName" placeholder="Tên tài khoản">
+													name="userName" placeholder="Số điện thoại" required>
 											</div>
 											<div class="form-group">
 												<div class="pwdMask">
@@ -268,7 +268,7 @@
 											</div>
 											<div class="form-group">
 												<input name="userName" type="text" class="form-control"
-													name="username" placeholder="Tên tài khoản">
+													name="username" placeholder="Số điện thoại" required>
 											</div>
 											<div class="form-group">
 												<div class="pwdMask">
@@ -307,10 +307,10 @@
 											<p>Mật khẩu mới sẽ được gửi về tài khoản của bạn.</p>
 										</div>
 										<form name="forgetForm" class="forgetForm"
-											action="layout-forgotPassword" method="POST">
+											action="layout-forgotPassword?mask=0" method="POST">
 											<div class="form-group">
 												<input name="email" type="text" class="form-control"
-													name="username" placeholder="Tài khoản">
+													name="username" placeholder="Số điện thoại" required>
 											</div>
 											<div class="form-group">
 												<button class="btn btn-lg btn-primary btn-block"

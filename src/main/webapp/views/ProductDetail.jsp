@@ -19,6 +19,7 @@
 </head>
 
 <body>
+	<div id = "toast"></div>
 	<div class="pd-wrap">
 		<div class="container">
 			<div class="row">
@@ -59,7 +60,8 @@
 								<label for="size">Hình thức bìa: ${cover.type_name}</label>
 							</div>
 							<div class="col-md-6">
-								<label for="size">Số lượng hiện có: ${productDetail.quantity}</label>
+								<label for="size">Số lượng hiện có:
+									${productDetail.quantity}</label>
 							</div>
 							<div class="col-md-6">
 								<label for="color"></label>
@@ -67,8 +69,8 @@
 						</div>
 
 						<div class="product-count">
-							<label for="size">Số lượng</label>
-							<input id="checkAmount" type="hidden" value="${productDetail.quantity}"/>
+							<label for="size">Số lượng</label> <input id="checkAmount"
+								type="hidden" value="${productDetail.quantity}" />
 							<form action="#" class="display-flex">
 								<div id="sub" class="qtyminus">-</div>
 								<input type="text" id="quantity" name="quantity" value="1"
@@ -87,16 +89,15 @@
 										hàng</a>
 								</c:if>
 							</c:if>
-							<c:if test="${sessionScope.account != null}">
+							<c:if test="${sessionScope.account != null}">	
 								<c:if test="${productDetail.quantity > 0}">
-									<a type="submit" onclick="buy('${productDetail.id}')"
+									<a type="submit" onclick="buy('${productDetail.id}') ; showSuccessToast();"
 										class="round-pink-btn">Thêm vào giỏ hàng</a>
 									<a href="layout-Payment" onclick="buy('${productDetail.id}')"
 										class="round-pink-btn">Mua ngay</a>
 								</c:if>
 								<c:if test="${productDetail.quantity == 0}">
-									<a class="round-pink-btn">Hết
-										hàng</a>
+									<a class="round-pink-btn" onclick="showErrorToast()">Hết hàng</a>
 								</c:if>
 							</c:if>
 						</div>
@@ -163,8 +164,80 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.14.0/sweetalert2.all.min.js"></script>
 
 
-	<script type="text/javascript">
+	<script>
+		function showSuccessToast() 
+	    {
+	      const main = document.getElementById('toast');
+	        if (main) {
+	            const toast = document.createElement('div');
+	
+	            const autoRemoveId = setTimeout(function() {
+	                main.removeChild(toast);
+	            }, 1000);
+	
+	            toast.onclick = function(e) {
+	                if (e.target.closest('.toast__close')){
+	                    main.removeChild(toast);
+	                    clearTimeout(autoRemoveId);
+	                }
+	            }
+	
+	            toast.classList.add('toast', `toast--success`);
+	            toast.style.animation = `slideInLeft ease 0.3s forwards, fadeOut linear 1s 0.3s forwards`;
+	
+	            toast.innerHTML = `
+	                <div class="toast__icon"> 
+	                    <i class="fa-solid fa-circle-check"}"></i>
+	                </div>
+	                <div class="toast__body">
+	                    <h3 class="toast__title">Thành công</h3>
+	                    <p class="toast__msg">Đã thêm vào giỏ hàng</p>
+	                </div>
+	                <div class="toast__close">
+	                    <i class="fa-solid fa-xmark"></i>
+	                </div>
+	            `;
+	            main.appendChild(toast);
+	
+	        	}
+	    	}
+	    	
+	    	function showErrorToast() 
+		    {
+		      const main = document.getElementById('toast');
+		        if (main) {
+		            const toast = document.createElement('div');
 		
+		            const autoRemoveId = setTimeout(function() {
+		                main.removeChild(toast);
+		            }, 1000);
+		
+		            toast.onclick = function(e) {
+		                if (e.target.closest('.toast__close')){
+		                    main.removeChild(toast);
+		                    clearTimeout(autoRemoveId);
+		                }
+		            }
+		
+		            toast.classList.add('toast', `toast--error`);
+		            toast.style.animation = `slideInLeft ease 0.3s forwards, fadeOut linear 1s 0.3s forwards`;
+		
+		            toast.innerHTML = `
+		                <div class="toast__icon"> 
+		                    <i class="fa-solid fa-circle-exclamation"}"></i>
+		                </div>
+		                <div class="toast__body">
+		                    <h3 class="toast__title">Thất bại</h3>
+		                    <p class="toast__msg">Không thể thêm vào giỏ hàng</p>
+		                </div>
+		                <div class="toast__close">
+		                    <i class="fa-solid fa-xmark"></i>
+		                </div>
+		            `;
+		            main.appendChild(toast);
+		
+		        	}
+		    	}
 	</script>
 
 	<script

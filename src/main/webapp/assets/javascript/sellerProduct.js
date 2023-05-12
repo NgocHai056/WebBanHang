@@ -50,12 +50,17 @@ function renderOrderinfo(data) {
 			categoryName: value.category.categoryName,
 			quantity: value.quantity,
 			price: value.price,
+			dis: value.discontinued
 		};
 	});
 
 	info_product.map(function(items) {
 		var formatSum = items.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
-
+		var disconutinue = ""
+		if(items.dis == 1)
+			disconutinue = "Còn bán"
+		else
+			disconutinue = "Dừng bán"
 		$(list).append(`                                
                         <tr>
                             <td>${items.id}</td>
@@ -63,6 +68,7 @@ function renderOrderinfo(data) {
                             <td>${items.categoryName}</td>
                             <td>${items.quantity}</td>
                             <td>${formatSum}</td>
+                            <td>${disconutinue}</td>
 							<td><a class="btn btn-warning btn-circle js-btn-editBook"><i class="fa-regular fa-pen-to-square"></i></a></td>
                             <td><a id="deletePd" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></a></td>
                         </tr>                                      

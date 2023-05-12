@@ -47,7 +47,12 @@ public class NewPassword extends HttpServlet {
 				} else {
 					request.setAttribute("message", "resetFailed");
 				}
-				response.sendRedirect("home");
+				
+				String homeOrShip = (String) session.getAttribute("homeOrShip");
+				if(homeOrShip.equals("home"))
+					response.sendRedirect("layout-Login?mask=login");
+				else
+					response.sendRedirect("layout-loginAdmin");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
