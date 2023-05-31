@@ -12,7 +12,7 @@
 		<mssql-version>9.4.0.jre8</mssql-version>
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<jackson-databind>2.13.4</jackson-databind>
-		<jackson-core>2.13.4</jackson-core>
+		<jackson-core>2.15.0</jackson-core>
 		<jackson-annotations>2.13.4</jackson-annotations>
 		<jackson-core-asl>1.9.13</jackson-core-asl>
 		<jackson-mapper-asl>1.9.13</jackson-mapper-asl>
