@@ -22,7 +22,9 @@ public class LogoutAdmin extends HttpServlet {
 		session.removeAttribute("adAccount");
 		session.removeAttribute("adEmail");
 		session.removeAttribute("adIdUser");
-		response.sendRedirect("layout-loginAdmin");
+		session.removeAttribute("adName");
+		
+		response.sendRedirect("layout-Login?mask=login");
 	}
 
 	@Override

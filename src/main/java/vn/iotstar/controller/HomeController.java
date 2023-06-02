@@ -37,7 +37,6 @@ public class HomeController extends HttpServlet {
 		// Lay danh sach san pham
 		List<ProductModel> listTop10Products = productDAO.getTop10Products();
 		List<ProductModel> displayProduct = productDAO.getDisplayProducts();
-		System.out.println(displayProduct);
 		// Lay danh sach the loai
 		List<CategoryModel> listCategorys = categoryDAO.getAllCategory();
 		

@@ -1,11 +1,16 @@
 var list = document.querySelector("#Table");
 var shipper = document.querySelector("#idUser")
 var idUser = shipper.value
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 function orderConfirmed(api) {
 	fetch(api, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
@@ -51,6 +56,7 @@ function editStatus(id) {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify({
 			"orderStatus": {

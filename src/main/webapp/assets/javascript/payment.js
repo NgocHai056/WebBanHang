@@ -4,6 +4,10 @@ const arrPrice = []
 var flag = 0
 
 var id = document.querySelectorAll("#id")
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 
 id.forEach(function(value) {
 	arrId.push(value.defaultValue)
@@ -25,8 +29,7 @@ const arrOrder = []
 
 
 
-var idUser = document.querySelector("#idUser")
-var idPs = idUser.defaultValue
+
 var currentDate = new Date().toJSON().slice(0, 10);
 
 const or = {
@@ -43,9 +46,6 @@ const or = {
 	},
 	"store": {
 		"id": 1
-	},
-	"user": {
-		"users_id": idPs
 	}
 }
 
@@ -73,6 +73,7 @@ btn.addEventListener('click', function() {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': valueToken
 			},
 			body: JSON.stringify(or),
 		})
@@ -103,6 +104,7 @@ btn.addEventListener('click', function() {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
+						'Authorization': valueToken
 					},
 					body: JSON.stringify(arrOrder),
 				})
@@ -125,12 +127,14 @@ function createOrderItems() {
 
 	}
 }
+
 function removeCartItems(id) {
 	if (flag == 1) {
 		fetch('http://localhost:8088/cartItems/' + id, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': valueToken
 			},
 		})
 			.then(function(res) {

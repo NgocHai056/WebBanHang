@@ -134,7 +134,7 @@
 				<h4 class="mb-3">Thông tin thanh toán</h4>
 				<form action="" method="get"
 					class="needs-validation" novalidate>
-					<input type="hidden" id="idUser" value="${sessionScope.idUser}"/>
+					<input type="hidden" id="idUser" value="${sessionScope.Authorization}"/>
 					<div class="mb-3">
 						<!-- <label for="firstName">Họ và tên</label> -->
 						<input type="text" class="form-control" id="firstName"

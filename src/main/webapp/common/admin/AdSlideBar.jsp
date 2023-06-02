@@ -23,7 +23,7 @@
 	<hr class="sidebar-divider my-0">
 
 	<!-- Nav Item -->
-	<li class="nav-item active"><a class="nav-link" href="admin-account">
+	<li class="nav-item active"><a class="nav-link" href="admin">
 			<i class="fa-regular fa-address-card"></i> <span>Quản lý tài
 				khoản</span>
 	</a></li>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +19,7 @@ import vn.iotstar.dao.UserDAO;
 import vn.iotstar.model.CartItemsModel;
 import vn.iotstar.model.CartModel;
 import vn.iotstar.model.UserModel;
+import vn.iotstar.securityweb.JwtUtil;
 
 /**
  * Servlet implementation class LoginAccountControl
@@ -51,11 +53,8 @@ public class LoginAccountControl extends HttpServlet {
 		Object object = mySession.getAttribute("cart");
 
 		if (userModel != null) {
-			if(userModel.getRole() != -1) {
-				mySession.setAttribute("account", userModel);
-				mySession.setAttribute("email", userName);
-				mySession.setAttribute("idUser", userModel.getUserID());
-				mySession.setAttribute("name", userModel.getUsers_first_name() + " " + userModel.getUsers_last_name());
+			if (userModel.getRole() != -1) {
+				
 
 				CartDAO cartDAO = new CartDAO();
 				CartModel cartModel = cartDAO.getCartByUserId(userModel.getUserID());
@@ -76,10 +75,33 @@ public class LoginAccountControl extends HttpServlet {
 					}
 					mySession.setAttribute("cart", map);
 				}
+				String token = JwtUtil.generateToken(userModel.getUsers_username(), userModel.getUserID());
+				mySession.setAttribute("Authorization", "Bearer " + token);
 
-				resp.sendRedirect("home");
-			}
-			else {
+				Cookie cookie = new Cookie("Authorization", token);
+				cookie.setMaxAge(24 * 60 * 60); // Thời gian tồn tại của cookie (ở đây là 1 ngày)
+				resp.addCookie(cookie);
+				if(userModel.getRole() == 3 || userModel.getRole() == 4) {
+					mySession.setAttribute("adAccount", userModel);
+					mySession.setAttribute("adEmail", userName);
+					mySession.setAttribute("adIdUser", userModel.getUserID());
+					mySession.setAttribute("adName", userModel.getUsers_first_name() + " " + userModel.getUsers_last_name());			
+					
+					if(userModel.getRole() == 3) {
+						resp.sendRedirect("admin-shipper");
+					}
+					if(userModel.getRole() == 4) {
+						resp.sendRedirect("admin");
+					}
+				}else {
+					mySession.setAttribute("account", userModel);
+					mySession.setAttribute("email", userName);
+					mySession.setAttribute("idUser", userModel.getUserID());
+					mySession.setAttribute("name", userModel.getUsers_first_name() + " " + userModel.getUsers_last_name());
+					resp.sendRedirect("home");
+				}
+				
+			} else {
 				mySession.setAttribute("alert", "Tài khoản đã bị khóa!!!");
 				resp.sendRedirect("layout-Login?mask=login");
 			}

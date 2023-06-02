@@ -40,7 +40,6 @@ public class PdsDetailController extends HttpServlet {
 		CoverTypeModel cover = pdsDetailDAO.getCoverType(idString);
 		List<PdImageModel> pdImageModelds = pdsDetailDAO.getImage(idString);
 
-		System.out.println(product);
 		req.setAttribute("productDetail", product);
 		req.setAttribute("pdImage", pdImageModelds);
 		req.setAttribute("cover", cover);

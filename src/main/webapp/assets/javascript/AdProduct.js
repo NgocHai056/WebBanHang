@@ -1,5 +1,8 @@
 
-
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 
 function start() {
 	var apiURL = 'http://localhost:8088/product'
@@ -15,6 +18,7 @@ function getOrderInfo(callback, apiURL) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -60,12 +64,15 @@ function renderOrderinfo(data) {
 
 }
 
+
+
 function deletePd(idPd) {
 	if (confirm("Xác nhận xóa!") == true) {
 		fetch('http://localhost:8088/product/' + idPd, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': valueToken
 			},
 		})
 			.then(function(res) {

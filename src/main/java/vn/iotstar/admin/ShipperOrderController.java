@@ -6,6 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import vn.iotstar.dao.UserDAO;
+import vn.iotstar.model.UserModel;
 
 /**
  * Servlet implementation class ShipperMyOrderController
@@ -14,13 +20,25 @@ import javax.servlet.http.HttpServletResponse;
 public class ShipperOrderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@PreAuthorize("hasRole('ROLE_SHIPPER')")
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
+		HttpSession mySession = req.getSession();
 
-		req.getRequestDispatcher("/viewAdmin/ShipperMyOrder.jsp").forward(req, resp);
+		UserDAO userDAO = new UserDAO();
+		UserModel userModel = (UserModel) mySession.getAttribute("adAccount");
+
+		if (userModel != null && userModel.getRole() == 3) {
+			req.getRequestDispatcher("/viewAdmin/ShipperMyOrder.jsp").forward(req, resp);
+
+		} else {
+			resp.sendRedirect("home");
+		}
+
 	}
 
 	@Override

@@ -1,3 +1,8 @@
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
+
 function start(statusId, id, idStore) {
 	var apiURL = 'http://localhost:8088/order/?idStore=' + idStore + '&idStatus=' + statusId
 	getOrderInfo(function(data) {
@@ -14,6 +19,7 @@ function getIdstore() {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -37,6 +43,7 @@ function getOrderInfo(callback, apiURL) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -142,6 +149,7 @@ function showFormProduct(id) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
@@ -166,6 +174,7 @@ function editStatus(id, idStatus) {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify({
 			"orderStatus": {
@@ -188,6 +197,7 @@ function deleteStatus(id) {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify({
 			"orderStatus": {

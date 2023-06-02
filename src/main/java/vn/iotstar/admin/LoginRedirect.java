@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import vn.iotstar.dao.UserDAO;
 import vn.iotstar.model.UserModel;
 
@@ -18,7 +20,8 @@ import vn.iotstar.model.UserModel;
 @WebServlet("/admin-redirect")
 public class LoginRedirect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+     
+//	@PreAuthorize("hasRole('ADMIN')")
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/html");
@@ -46,7 +49,7 @@ public class LoginRedirect extends HttpServlet {
 				resp.sendRedirect("admin-shipper");
 			}
 			if(userModel.getRole() == 4) {
-				resp.sendRedirect("admin-account");
+				resp.sendRedirect("admin");
 			}
 			
 			

@@ -36,7 +36,7 @@ public class AdminAccountController extends HttpServlet {
 			userDAO.editRole(user);
 		}
 
-		resp.sendRedirect("admin-account");
+		resp.sendRedirect("admin");
 	}
 
 	@Override

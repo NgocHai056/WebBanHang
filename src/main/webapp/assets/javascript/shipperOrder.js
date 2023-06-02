@@ -5,13 +5,17 @@ var nameShipper = {
      	"users_id": shipper.value,
    	}
 } 
-
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 
 function orderUnconfirmed() {
 	fetch('http://localhost:8088/order/Unconfirmed', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
@@ -41,6 +45,7 @@ function editStatus(id) {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify(nameShipper),
 	})

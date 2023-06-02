@@ -17,6 +17,12 @@ add.addEventListener('change', function(e) {
 	json.users_shipping_address = e.target.value
 })
 
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
+  
+
 var btn = document.querySelector("#luu")
 btn.addEventListener('click', function() {
 	if (json.users_phone != '' && json.users_shipping_address != '') {
@@ -24,6 +30,7 @@ btn.addEventListener('click', function() {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': valueToken
 			},
 			body: JSON.stringify(json),
 		})

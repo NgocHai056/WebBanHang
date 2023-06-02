@@ -12,12 +12,17 @@ start(1, '#waiting_form');
 start(2, '#shipping_form');
 start(3, '#shipped_form');
 start(4, '#cancel_form');
-
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
+  
 function getOrderInfo(callback, apiURL) {
 	fetch(apiURL, {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {

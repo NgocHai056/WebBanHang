@@ -6,21 +6,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+
+import vn.iotstar.dao.UserDAO;
+import vn.iotstar.model.UserModel;
 
 /**
  * Servlet implementation class AdAccountController
  */
-@WebServlet("/admin-account")
+@WebServlet("/admin")
 public class AdAccountController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	protected void processRequest(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		resp.setContentType("text/html");
 		resp.setCharacterEncoding("UTF-8");
 		req.setCharacterEncoding("UTF-8");
+		
+		HttpSession mySession = req.getSession();
 
-		req.getRequestDispatcher("/viewAdmin/AdAccount.jsp").forward(req, resp);
+		UserDAO userDAO = new UserDAO();
+		UserModel userModel = (UserModel) mySession.getAttribute("adAccount");
+		if (userModel != null && userModel.getRole() == 4) {
+			req.getRequestDispatcher("/viewAdmin/AdAccount.jsp").forward(req, resp);
+
+		} else {
+			resp.sendRedirect("home");
+		}
+
 	}
 
 	@Override

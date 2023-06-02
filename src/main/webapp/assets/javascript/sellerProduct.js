@@ -1,6 +1,10 @@
 var idUser = document.querySelector('#idUser')
 var IDUser = idUser.defaultValue
 
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 
 function start(id) {
 	var apiURL = 'http://localhost:8088/product/store/' + id
@@ -14,6 +18,7 @@ function getIdstore() {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -31,6 +36,7 @@ function getOrderInfo(callback, apiURL) {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -84,6 +90,7 @@ function fetchCbb() {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
@@ -132,6 +139,7 @@ setTimeout(function() {
 					method: 'DELETE',
 					headers: {
 						'Content-Type': 'application/json',
+						'Authorization': valueToken
 					},
 				})
 					.then(function(res) {
@@ -170,6 +178,7 @@ setTimeout(function() {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
+					'Authorization': valueToken
 				},
 			})
 				.then(function(res) {
@@ -211,7 +220,7 @@ function showForm(oneProduct) {
 
                 <div class="mb-3 form_text col-lg-12">
                     <span class="text_title">Mô tả</span>
-                    <textarea id="description" class="form-control" rows="3" required>${oneProduct.description}</textarea>
+                    <textarea maxlength="1000" id="description" class="form-control" rows="3" required>${oneProduct.description}</textarea>
                 </div>
 
                 <div class="mb-3 form_text col-lg-12">
@@ -285,6 +294,7 @@ function showForm(oneProduct) {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
+				'Authorization': valueToken
 			},
 			body: JSON.stringify(oneProduct),
 		})

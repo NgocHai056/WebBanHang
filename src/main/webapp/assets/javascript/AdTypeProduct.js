@@ -1,10 +1,16 @@
 var cateTable = document.querySelector("#idCateTable")
 
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
+
 function getAllCate() {
 	fetch('http://localhost:8088/category/all', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
@@ -93,6 +99,7 @@ function delCate() {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify(cate),
 	})
@@ -115,6 +122,7 @@ function addOrEdit() {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 		body: JSON.stringify(cate),
 	})

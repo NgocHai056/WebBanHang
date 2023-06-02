@@ -1,10 +1,15 @@
 var list = document.querySelector("#User")
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
 
 function getAllUser() {
 	fetch('http://localhost:8088/user', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		}
 	})
 		.then(function(res) {
@@ -53,7 +58,7 @@ function deleteUser(id) {
 				idUser: id,
 			},
 			success: function(data) {
-				window.location.href = 'http://' + window.location.host + '/WebBanHang/admin-account'
+				window.location.href = 'http://' + window.location.host + '/WebBanHang/admin'
 
 			},
 			error: function(xhr) {

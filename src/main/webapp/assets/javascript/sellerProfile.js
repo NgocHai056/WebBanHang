@@ -5,12 +5,17 @@ var idname = document.querySelector('#name')
 var idtel = document.querySelector('#tel')
 var idemail = document.querySelector('#email')
 var idtext = document.querySelector('#text')
-
+var valueToken = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('Authorization='))
+  .split('=')[1];
+  
 function getStore() {
 	fetch('http://localhost:8088/store/?idUser=' + IDUser, {
 		method: 'GET',		
 		headers: {
 			'Content-Type': 'application/json',
+			'Authorization': valueToken
 		},
 	})
 		.then(function(res) {
