@@ -12,7 +12,7 @@
 		<sitemesh.version>2.4.2</sitemesh.version>
 		<jackson-databind>2.13.4</jackson-databind>
 		<jackson-core>2.13.4</jackson-core>
-		<jackson-annotations>2.13.4</jackson-annotations>
+		<jackson-annotations>2.15.0</jackson-annotations>
 		<jackson-core-asl>1.9.13</jackson-core-asl>
 		<jackson-mapper-asl>1.9.13</jackson-mapper-asl>
 		<gson-version>2.9.1</gson-version>
